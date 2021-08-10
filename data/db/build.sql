@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS users (
+    UserID INT PRIMARY KEY,
+    UserName VARCHAR,
+    EpicId VARCHAR
+);
