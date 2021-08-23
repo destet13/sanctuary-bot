@@ -1,3 +1,4 @@
+import os
 from asyncio import sleep
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from glob import glob
@@ -9,9 +10,11 @@ from discord.ext.commands.errors import CommandNotFound, MissingRequiredArgument
 
 from ..db import db
 
-PREFIX = "/"
-OWNER_IDS = ["156510645729099777", "612645749238530060"]
+PREFIX = "!"
+OWNER_IDS = os.environ.get('IDS')
 COGS = [path.split("\\")[-1][:-3] for path in glob("./lib/cogs/*.py")]
+GUILD_ID = int(os.environ.get('GUILD_ID'))
+CHANNEL_ID = int(os.environ.get('CHANNEL_ID'))
 
 class Ready(object):
     def __init__(self):
@@ -54,8 +57,7 @@ class Bot(BotBase):
 
         self.setup()
 
-        with open("./lib/bot/token", "r", encoding="utf-8") as tf:
-            self.TOKEN = tf.read()
+        self.TOKEN = os.environ.get('TOKEN')
 
         print(f"Running bot version {version}...")
         super().run(self.TOKEN, reconnect=True)
@@ -87,8 +89,8 @@ class Bot(BotBase):
     
     async def on_ready(self):
         if not self.ready:
-            self.guild = self.get_guild(798394787032072252)
-            self.stdout = self.get_channel(798394787032072255)
+            self.guild = self.get_guild(GUILD_ID)
+            self.stdout = self.get_channel(CHANNEL_ID)
             self.scheduler.start()
 
             while not self.cogs_ready.all_ready():
