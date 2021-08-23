@@ -41,7 +41,7 @@ class Bot(BotBase):
         super().__init__(
             command_prefix=PREFIX, 
             owner_ids=OWNER_IDS, 
-            # intents=Intents.all(),
+            intents=Intents.all(),
         )
     
     def setup(self):
