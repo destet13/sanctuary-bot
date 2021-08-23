@@ -12,7 +12,7 @@ from ..db import db
 
 PREFIX = "!"
 OWNER_IDS = os.environ.get('IDS')
-COGS = [path.split("\\")[-1][:-3] for path in glob("./lib/cogs/*.py")]
+COGS = [path.split("/")[-1][:-3] for path in glob("./lib/cogs/*.py")]
 GUILD_ID = int(os.environ.get('GUILD_ID'))
 CHANNEL_ID = int(os.environ.get('CHANNEL_ID'))
 
