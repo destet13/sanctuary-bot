@@ -1,8 +1,8 @@
 import os
 from asyncio import sleep
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from glob import glob
 
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from discord import Intents
 from discord.errors import Forbidden
 from discord.ext.commands import Bot as BotBase
@@ -12,7 +12,7 @@ from ..db import db
 
 PREFIX = "!"
 OWNER_IDS = os.environ.get('IDS')
-COGS = [path.split("/")[-1][:-3] for path in glob("./lib/cogs/*.py")]
+COGS = [path.split("\\")[-1][:-3] for path in glob("./lib/cogs/*.py")]
 GUILD_ID = int(os.environ.get('GUILD_ID'))
 CHANNEL_ID = int(os.environ.get('CHANNEL_ID'))
 
